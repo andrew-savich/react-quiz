@@ -3,13 +3,14 @@ import classes from './Auth.module.css'
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
 function validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
 
-export default class Auth extends Component {
+class Auth extends Component {
 
   state = {
     isFormValid: false,
@@ -173,3 +174,9 @@ export default class Auth extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch){return {
+  auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+}}
+
+export default connext(null, mapDispatchToProps)(Auth)
